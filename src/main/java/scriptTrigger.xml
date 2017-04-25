@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+    <config>
+        <trigger>
+            <object>user</object>
+            <operate>add</operate>
+            <position>after</position>
+            <order>1</order>
+            <class>other.abpajc.bdiabdbikcikc.trigger.UserAddAfterTrigger</class>
+        </trigger>
+        <trigger>
+            <object>user</object>
+            <operate>update</operate>
+            <position>after</position>
+            <order>1</order>
+            <class>other.abpajc.bdiabdbikcikc.trigger.UserUpdateAfterTrigger</class>
+        </trigger>
+    </config>
+</configs>
+

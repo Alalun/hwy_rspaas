@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>媒体分布地图</title>
+    <link rel="bookmark" type="image/x-icon" href="https://rs.ingageapp.com/static/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="https://rs.ingageapp.com/static/deploy/rk1.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://rs.ingageapp.com/static/gcss/lib/jqwidgets/styles/jqx.base.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://rs.ingageapp.com/static/gcss/lib/jqwidgets/styles/jqx-base-rk-v2.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://rs.ingageapp.com/static/gcss/lib/jquery-ui/1.11.3/jquery-ui.css">
+    <link rel="stylesheet" type="text/css"
+          href="https://rs.ingageapp.com/static/gcss/lib/jquery-ui/1.11.3/jquery-ui-rk.css">
+    <link rel="stylesheet" type="text/css" href="https://rs.ingageapp.com/static/deploy/rk2.css">
+    <link charset="utf-8" rel="stylesheet"
+          href="https://rs.ingageapp.com/static/deploy/core/widgets/grid/popup.grid.css">
+    <!--<link rel="stylesheet" type="text/css" href="https://webapi.amap.com/theme/v1.3/style1.3.20.2.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="https://crm.xiaoshouyi.com/admin/css/setstyle.css">-->
+    <style type="text/css">
+        .amap-container {
+            cursor: url(https://webapi.amap.com/theme/v1.3/openhand.cur), default;
+        }
+
+        .amap-drag {
+            cursor: url(https://webapi.amap.com/theme/v1.3/closedhand.cur), default;
+        }
+
+        a.pg-btn-blue {
+            position: relative;
+            display: block;
+            float: right;
+            width:35px;
+            color: #fff !important;
+            border: 1px solid #00aaef ;
+            border-radius: 3px;
+            background: #00aaef;
+
+            padding: 6px 6px;
+            margin-bottom: 0;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -ms-touch-action: manipulation;
+            touch-action: manipulation;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        a.pg-btn-blue:hover {
+            text-decoration: none;
+            color: #fff !important;
+            border: 1px solid #39c;
+            background: #39c;
+        }
+
+        .amap-sug-result {
+            position: fixed;
+            z-index: 99999999;
+            background-color: #fefefe;
+            border: 1px solid #d1d1d1;
+        }
+    </style>
+
+    <script>
+    </script>
+</head>
+<body>
+<!-- <script src="./js/jquery-1.8.3.min.js" type="text/javascript"></script> -->
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery-ui.js" type="text/javascript"></script>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="./js/bootstrap.min.js"></script>
+<script>
+    window.SESSION = {
+        tenantId: 228369
+    };
+
+</script>
+
+<script src="https://rs.ingageapp.com/static/deploy/rk1.js?6d82f854b6ad8cdfdc9ff14cd60a1f2b"></script>
+<!--<script src="https://bi-collector.oneapm.com/static/js/bw-loader-411.4.5.js"></script>-->
+<script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=242940e21d575db5ec2f2c0ff4daa6b0" charset="utf-8"></script>
+<script type="text/javascript" src="./js/checkinmap.js?v=2.3" charset="utf-8"></script>
+<script>
+
+</script>
+
+<div id="div_container_content" class="container_content" rk-crm-init="">
+    <div class="checkin_map_header workreport-schedule-header">
+        <div class="ax_default image"><a href="javascript:void(0);" class="prve"
+                                         id="checkin_date_prev"><span></span></a></div>
+        <div class="lfloat">
+            <input type="text" readonly  id="analysisChartCalendar"/>
+            <!--<input id="analysisChartCalendar" type="date" style="height:30px;border:none;text-align:right;"/>-->
+        </div>
+        <div class="ax_default image"><a href="javascript:void(0);" class="next"
+                                         id="checkin_date_after"><span></span></a></div>
+    </div>
+    <div class="main_grid checkin_map">
+        <div class="main_grid_middlle main-grid-box" id="div_grid_container">
+            <div class="user-info-detail checkin_map_nav">
+                <div class="grid_bread_crumb trajectory_bread_crumb document_title map_bread_crumb"
+                     id="div_grid_bread_crumb">
+                    <div class="lfloat js-user_tree">
+                        <div class="ui-powerinput-box" style="width: 100%; height: 100%;" id="tip"><input
+                                type="text" id="userTree" class="ui-autocomplete-input"
+                                placeholder="请输入位置"/>
+                        </div>
+                    </div>
+
+                    <div class="search-current-position" style="margin-right: auto">
+                        <span style="font-size: 14px;color: #29aef3;">附近</span>
+                        <select class="form-control ng-pristine ng-valid" style="width: 65px;margin-right: 5px;display: inline" id="meterSelect">
+                            <option value="500">500m</option>
+                            <option value="1000" selected>1km</option>
+                            <option value="2000">2km</option>
+                            <option value="3000">3km</option>
+                            <option value="5000">5km</option>
+                        </select>
+                        <!--<a href="javascript:;"  act="search_media" style="color: #fff !important;border: 1px solid #00aaef ;border-radius: 3px;background: #00aaef;">查看</a>-->
+                    </div>
+                </div>
+                <div class="checkin-map-div checkin-map-count">无媒体信息</div>
+            </div>
+            <div id="mapContainer" class="amap-container"
+                 style="position: relative; cursor: url('https://webapi.amap.com/theme/v1.3/openhand.cur'), default;">
+                <object style="display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;"
+                        type="text/html" data="about:blank"></object>
+                <div class="amap-maps">
+                    <div class="amap-drags">
+                        <div class="amap-layers" style="transform: translateZ(0px);">
+                            <canvas class="amap-layer" width="1920" height="1030"
+                                    style="position: absolute; z-index: 0; transform-origin: 960px 515px 0px; transform: scale3d(0.5, 0.5, 1); top: -258px; left: -480px;"></canvas>
+                            <div style="position: absolute; z-index: 120; top: 257px; left: 480px;"></div>
+                            <canvas width="1920" height="1030"
+                                    style="position: absolute; z-index: 99; height: 515px; width: 960px; top: 0px; left: 0px;"></canvas>
+                        </div>
+                        <div class="amap-overlays"></div>
+                    </div>
+                </div>
+                <div style="display: none;"></div>
+                <div class="amap-controls"></div>
+                <a class="amap-logo" href="http://gaode.com" target="_blank"><img
+                        src="https://webapi.amap.com/theme/v1.3/mapinfo_05.png"></a>
+                <div class="amap-copyright" style="display: none;"><!--v1.3.19--> © 2016 AutoNavi <span
+                        class="amap-mcode">- GS(2016)710号</span></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
