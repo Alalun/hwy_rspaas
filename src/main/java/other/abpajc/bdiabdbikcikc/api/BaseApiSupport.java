@@ -65,8 +65,6 @@ public abstract class BaseApiSupport {
     protected String apiRequest(RkhdHttpData rkhdHttpData) {
         String result = "";
         try {
-            ScriptTriggerParam scriptTriggerParam = new ScriptTriggerParam();
-
             RkhdHttpClient rkhdHttpClient = new RkhdHttpClient();
             result = rkhdHttpClient.performRequest(rkhdHttpData);
             JSONObject resultObj = JSONObject.fromObject(result);
@@ -302,7 +300,6 @@ public abstract class BaseApiSupport {
         body.accumulate("belongId", belongId);
         body.accumulate("record", record);
         rkhdHttpData.setBody(body.toString());
-
         String result = apiRequest(rkhdHttpData);
         logger.info("createBelongs:" + result);
         return JSONObject.fromObject(result);

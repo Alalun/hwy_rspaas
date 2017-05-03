@@ -15,6 +15,21 @@
             <order>1</order>
             <class>other.abpajc.bdiabdbikcikc.trigger.UserUpdateAfterTrigger</class>
         </trigger>
+        <trigger>
+            <object>customEntity22</object>
+            <operate>add</operate>
+            <position>after</position>
+            <order>1</order>
+            <class>other.abpajc.bdiabdbikcikc.trigger.InitiateCusDisAddAfterTrigger</class>
+        </trigger>
+        <trigger>
+            <object>customEntity22</object>
+            <operate>update</operate>
+            <position>after</position>
+            <order>1</order>
+            <class>other.abpajc.bdiabdbikcikc.trigger.InitiateCusDisUpdateAfterTrigger</class>
+        </trigger>
+        Initiate customer discussion
     </config>
 </configs>
 
